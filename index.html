@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <link rel="icon" href="img/green_mark_logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>Green Mark</title>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="preloader-inner">
+      <div class="preloader-logo">
+        <span class="pre-green">Green</span> <span class="pre-mark">Mark</span>
+      </div>
+      <div class="preloader-bar"><div class="preloader-fill"></div></div>
+    </div>
+  </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="logo-container">        
+            <a href="#home" class="logo-link">
+              <img src="img/green_mark_logo.png" alt="Green Mark Logo" class="logo-image">
+              <span class="logo-text"><span>Green</span> Mark</span>
+            </a>
+        </div>
+        
+        <nav class="navbar">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#about" class="nav-link">About Us</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+
+        <a href="https://wa.me/+971509007659" class="header-cta" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> Get In Touch
+        </a>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <!-- Home / Hero -->
+    <section class="home" id="home">
+        <div class="swiper home-slid">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide box">
+                    <div class="slide-bg" style="background-image:url('img/hero-carousel/img1.jpg')"></div>
+                    <div class="slide-overlay"></div>
+                    <div class="content">
+                        <div class="slide-tag">Welcome to</div>
+                        <h1><em>Green</em> Mark</h1>
+                        <p>Let's Build Your Success Together.</p>
+                        <a href="#services" class="hero-btn">Our Services <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="swiper-slide box">
+                    <div class="slide-bg" style="background-image:url('img/hero-carousel/img2.jpg')"></div>
+                    <div class="slide-overlay"></div>
+                    <div class="content">
+                        <div class="slide-tag">Excellence in Every Step</div>
+                        <h1><em>Vision</em> Meets<br>Expertise</h1>
+                        <p>Your vision and our expertise create the future.</p>
+                        <a href="#about" class="hero-btn">About Us <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="swiper-slide box">
+                    <div class="slide-bg" style="background-image:url('img/hero-carousel/img3.jpg')"></div>
+                    <div class="slide-overlay"></div>
+                    <div class="content">
+                        <div class="slide-tag">Innovation Driven</div>
+                        <h1>Exceptional<br><em>Results</em></h1>
+                        <p>Innovative solutions for outstanding outcomes.</p>
+                        <a href="#contact" class="hero-btn">Contact Us <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="swiper-slide box">
+                    <div class="slide-bg" style="background-image:url('img/hero-carousel/img4.jpg')"></div>
+                    <div class="slide-overlay"></div>
+                    <div class="content">
+                        <div class="slide-tag">Your Trusted Partner</div>
+                        <h1>From First Step<br>to the <em>Top</em></h1>
+                        <p>With you every step of the journey.</p>
+                        <a href="#services" class="hero-btn">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="scroll-hint">
+          <span>Scroll</span>
+          <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-num">8000 +</span>
+        <span class="stat-label">Clients Served</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">9+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Client Satisfaction</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">UAE</span>
+        <span class="stat-label">Dubai Based</span>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="about-inner">
+          <div class="about-image-wrap">
+              <img src="img/about/1.png" alt="Green Mark Office">
+              <div class="about-badge">
+                <span>Est.</span>
+                <strong>2019</strong>
+              </div>
+          </div>
+          <div class="about-content">
+              <span class="section-eyebrow">Who We Are</span>
+              <h2 class="section-title">Our <em>Company</em></h2>
+              <div class="title-line"></div>
+              <p>At Green Mark Company, we pride ourselves on offering innovative and effective solutions to help your business thrive. Our team of experts has the skills and experience to provide tailored services that meet your unique needs.</p>
+              <p>From document clearance to business setup, we're here to help. Our team is passionate about delivering real solutions that make a difference. With a focus on efficiency, accuracy, and outstanding customer service, we are committed to helping you succeed.</p>
+              <div class="about-features">
+                <div class="feature-item">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span>Fast & Reliable</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span>Expert Team</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span>Tailored Solutions</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span>24/7 Support</span>
+                </div>
+              </div>
+              <a href="#contact" class="btn-primary">Work With Us</a>
+          </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="section-header">
+          <span class="section-eyebrow">What We Offer</span>
+          <h2 class="section-title">Our <em>Services</em></h2>
+          <div class="title-line centered"></div>
+        </div>
+
+        <div class="services-slider-wrap">
+          <!-- Arrow Left -->
+          <button class="services-arrow services-arrow-prev" id="servicesPrev" aria-label="Previous">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+          <div class="services-track-outer">
+            <div class="services-container" id="servicesTrack">
+                <div class="service-card">
+                    <div class="card-number">01</div>
+                    <div class="card-icon"><i class="fa-solid fa-file-invoice"></i></div>
+                    <h3>Document Clearance</h3>
+                    <p>Professional handling of all government and corporate paperwork with speed and unmatched accuracy.</p>
+                    <div class="card-hover-line"></div>
+                </div>
+                <div class="service-card">
+                    <div class="card-number">02</div>
+                    <div class="card-icon"><i class="fa-solid fa-handshake"></i></div>
+                    <h3>Business Setup</h3>
+                    <p>Expert guidance to start your new business journey in the UAE from A to Z, hassle-free.</p>
+                    <div class="card-hover-line"></div>
+                </div>
+                <div class="service-card">
+                    <div class="card-number">03</div>
+                    <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>PRO Services</h3>
+                    <p>Comprehensive PRO solutions to manage your company's official government requirements smoothly.</p>
+                    <div class="card-hover-line"></div>
+                </div>
+                <div class="service-card">
+                    <div class="card-number">03</div>
+                    <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>PRO Services 2</h3>
+                    <p>Comprehensive PRO solutions to manage your company's official government requirements smoothly.</p>
+                    <div class="card-hover-line"></div>
+                </div>
+                <div class="service-card">
+                    <div class="card-number">03</div>
+                    <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>PRO Services 3</h3>
+                    <p>Comprehensive PRO solutions to manage your company's official government requirements smoothly.</p>
+                    <div class="card-hover-line"></div>
+                </div>
+            </div>
+          </div>
+
+          <!-- Arrow Right -->
+          <button class="services-arrow services-arrow-next" id="servicesNext" aria-label="Next">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <!-- Dots -->
+        <div class="services-dots" id="servicesDots">
+          <span class="services-dot active" data-index="0"></span>
+          <span class="services-dot" data-index="1"></span>
+          <span class="services-dot" data-index="2"></span>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="section-header">
+          <span class="section-eyebrow">Reach Out</span>
+          <h2 class="section-title">Contact <em>Us</em></h2>
+          <div class="title-line centered"></div>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info">
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                <div class="contact-details">
+                  <h4>Call Us</h4>
+                  <a href="tel:+971509007659">+971 50 900 7659</a>
+                  <span>Mon–Sat &nbsp;|&nbsp; 10am – 7pm</span>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="contact-details">
+                  <h4>Email Us</h4>
+                  <a href="mailto:Info@greenmarkservice.com">Info@greenmarkservice.com</a>
+                  <span>We reply within 24 hours</span>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="contact-details">
+                  <h4>Visit Us</h4>
+                  <span>UAE, Dubai</span>
+                  <span>Mabrooka 4  Office-104</span>
+                </div>
+            </div>
+          </div>
+
+          <div class="map-wrap">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3608.209777649747!2d55.3302691!3d25.2635277!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5d073c80c135%3A0xfd8f4e3edde5637c!2sMabrooka%204!5e0!3m2!1sen!2seg!4v1726339459603!5m2!1sen!2seg" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+            <h3><span>Green</span> Mark</h3>
+            <p>Offering innovative and effective solutions to help your business thrive in the UAE and beyond.</p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/profile.php?id=100080289038167" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://instagram.com" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://linkedin.com" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://wa.me/+971509007659" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#home"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+            <li><a href="#about"><i class="fa-solid fa-chevron-right"></i> About Us</a></li>
+            <li><a href="#services"><i class="fa-solid fa-chevron-right"></i> Services</a></li>
+            <li><a href="#contact"><i class="fa-solid fa-chevron-right"></i> Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services"><i class="fa-solid fa-chevron-right"></i> Document Clearance</a></li>
+            <li><a href="#services"><i class="fa-solid fa-chevron-right"></i> Business Setup</a></li>
+            <li><a href="#services"><i class="fa-solid fa-chevron-right"></i> PRO Services</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact-col">
+          <h4>Contact</h4>
+          <p><i class="fa-solid fa-location-dot"></i> Dubai, United Arab Emirates</p>
+          <p><i class="fa-solid fa-phone"></i> <a href="tel:+971509007659">+971 50 900 7659</a></p>
+          <p><i class="fa-solid fa-envelope"></i> <a href="mailto:Info@greenmarkservice.com">Info@greenmarkservice.com</a></p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 <strong>Green Mark</strong>. All rights reserved.</p>
+        <p>Dubai, UAE &nbsp;|&nbsp; Business Services</p>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button id="scrollTopBtn" onclick="scrollToTop()" aria-label="Scroll to top">
+      <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/+971509007659" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="tooltip-text">Chat with us!</span>
+    </a>
+    
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
