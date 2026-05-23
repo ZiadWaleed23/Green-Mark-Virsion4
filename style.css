@@ -1121,3 +1121,71 @@ ul { list-style: none; }
   .about-features { grid-template-columns: 1fr; }
   .scroll-hint { display: none; }
 }
+
+
+
+
+/* ---------------------------------------------------
+   Service Details Expand (Learn More) - FIXED
+--------------------------------------------------- */
+
+/* تظبيط الزرار عشان يبقى تحت دايماً وفوق أي طبقة تانية */
+.learn-more-btn {
+  background: none;
+  border: none;
+  color: var(--green-accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: auto; 
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem; /* مساحة صغيرة من تحت */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  transition: color var(--transition);
+  outline: none;
+  
+  /* التعديل السحري هنا 👇 */
+  position: relative; 
+  z-index: 99 !important; /* عشان نطلعه فوق خط الهوفر وأي طبقة تانية */
+  pointer-events: auto; /* عشان نجبره يقبل الضغط */
+}
+
+.service-card:hover .learn-more-btn {
+  color: var(--gold);
+}
+
+/* لفة السهم لما يفتح */
+.learn-more-btn i {
+  transition: transform 0.3s ease;
+}
+.service-card.show-details .learn-more-btn i {
+  transform: rotate(180deg);
+}
+
+/* إخفاء مكان التفاصيل في الوضع الطبيعي */
+.service-details {
+  position: relative;
+  z-index: 98; /* عشان التفاصيل برضه تبقى فوق الكارت وتتقري بوضوح */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease, margin-top 0.3s ease;
+}
+
+/* شكل التفاصيل */
+.service-details p {
+  font-size: 0.85rem;
+  color: var(--gray-mid);
+  margin-bottom: 0;
+  padding-bottom: 1rem; /* مساحة عشان الكلام ميبقاش لازق في آخر الكارت */
+}
+
+/* إظهار التفاصيل لما الزرار يتضغط */
+.service-card.show-details .service-details {
+  max-height: 300px;
+  opacity: 1;
+  margin-top: 1rem;
+}
