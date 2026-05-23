@@ -386,3 +386,25 @@ document.head.appendChild(style);
     glow.style.opacity = '0';
   });
 })();
+
+
+
+
+
+
+/* ─────────────────────────────────────────────
+   TOGGLE SERVICE DETAILS (LEARN MORE)
+───────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  const learnMoreBtns = document.querySelectorAll('.learn-more-btn');
+  
+  learnMoreBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // بنجيب الكارت اللي العميل داس عليه
+      const card = this.closest('.service-card');
+      
+      // بنفتح أو نقفل الكارت ده
+      card.classList.toggle('show-details');
+    });
+  });
+});
