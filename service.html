@@ -9,8 +9,829 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
   <link rel="icon" href="img/green_mark_logo.png">
-  <link rel="stylesheet" href="service.css">
   <title>Service — Green Mark</title>
+
+  <style>
+    /* ═══════════════════════════════════════════
+       GREEN MARK — Service Detail Page
+       Full Responsive: 320px → 1600px+
+    ═══════════════════════════════════════════ */
+    :root {
+      --green-deep:    #0a2416;
+      --green-mid:     #14532d;
+      --green-accent:  #22c55e;
+      --green-light:   #bbf7d0;
+      --gold:          #c9a84c;
+      --gold-light:    #f0d990;
+      --cream:         #f8f5ee;
+      --white:         #ffffff;
+      --gray-soft:     #f3f4f6;
+      --gray-mid:      #9ca3af;
+      --text-body:     #374151;
+      --font-display:  'Cormorant Garamond', serif;
+      --font-body:     'DM Sans', sans-serif;
+      --transition:    0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition-fast: 0.2s ease;
+      --radius:        12px;
+      --header-h:      70px;
+      --page-pad:      clamp(1.1rem, 5vw, 4.5rem);
+      --mobile-cta-h:  72px; /* sticky bottom bar height on mobile */
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--font-body);
+      color: var(--text-body);
+      background: var(--white);
+      overflow-x: hidden;
+      line-height: 1.7;
+      /* bottom padding reserved for mobile sticky CTA */
+      padding-bottom: 0;
+    }
+    img  { display: block; max-width: 100%; }
+    a    { text-decoration: none; color: inherit; }
+    ul   { list-style: none; }
+    button { cursor: pointer; font-family: inherit; }
+
+    /* ════════════════════════════════
+       HEADER
+    ════════════════════════════════ */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--page-pad);
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow: 0 1px 0 rgba(10,36,22,0.08), 0 4px 24px rgba(10,36,22,0.06);
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex-shrink: 0;
+    }
+    .logo-image {
+      width: 36px; height: 36px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 5px rgba(34,197,94,0.3));
+    }
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .logo-text span { color: var(--green-accent); }
+
+    /* Back button — full label on desktop, icon-only on mobile */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      padding: 8px 18px;
+      border: 1.5px solid rgba(20,83,45,0.35);
+      border-radius: 50px;
+      transition: background var(--transition), color var(--transition),
+                  border-color var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+    .back-btn .btn-label { display: inline; }
+    .back-btn:hover {
+      background: var(--green-deep);
+      border-color: var(--green-deep);
+      color: var(--white);
+      transform: translateX(-2px);
+    }
+
+    /* ════════════════════════════════
+       HERO
+    ════════════════════════════════ */
+    .service-hero {
+      position: relative;
+      min-height: clamp(340px, 55vh, 580px);
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: var(--green-deep);
+      padding-top: var(--header-h);
+    }
+
+    .hero-bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse 70% 60% at 15% 55%, rgba(34,197,94,0.13) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 85% 15%, rgba(201,168,76,0.09) 0%, transparent 50%),
+        radial-gradient(ellipse 30% 30% at 90% 80%, rgba(34,197,94,0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Decorative rings */
+    .hero-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(34,197,94,0.07);
+      pointer-events: none;
+    }
+    .hero-ring-1 { width: 500px; height: 500px; top: -160px; right: -100px; }
+    .hero-ring-2 { width: 280px; height: 280px; bottom: -80px; left: 38%; border-color: rgba(201,168,76,0.06); }
+
+    /* Vertical accent line */
+    .hero-accent-line {
+      position: absolute;
+      left: clamp(1.1rem, 5vw, 4.5rem);
+      top: calc(var(--header-h) + 1.5rem);
+      bottom: 2rem;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(34,197,94,0.3) 30%, rgba(34,197,94,0.3) 70%, transparent);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 3rem var(--page-pad) clamp(2.5rem, 5vw, 3.5rem);
+      padding-left: calc(var(--page-pad) + clamp(0px, 2vw, 28px));
+    }
+
+    .service-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.1rem;
+    }
+    .service-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px; height: 1.5px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .hero-icon {
+      width: clamp(52px, 7vw, 64px);
+      height: clamp(52px, 7vw, 64px);
+      border-radius: 14px;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1.3rem, 2.5vw, 1.65rem);
+      color: var(--green-accent);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5.5vw, 4rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      max-width: 700px;
+    }
+    .hero-title em { font-style: italic; color: var(--green-accent); }
+
+    .hero-desc {
+      font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+      color: rgba(255,255,255,0.58);
+      max-width: clamp(280px, 55vw, 540px);
+      line-height: 1.75;
+    }
+
+    /* Breadcrumb strip at bottom of hero */
+    .breadcrumb {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0.75rem var(--page-pad);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      background: rgba(0,0,0,0.15);
+      backdrop-filter: blur(4px);
+      z-index: 3;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .breadcrumb a {
+      color: rgba(255,255,255,0.42);
+      transition: color var(--transition-fast);
+      flex-shrink: 0;
+    }
+    .breadcrumb a:hover { color: var(--green-accent); }
+    .breadcrumb .bc-current {
+      color: rgba(255,255,255,0.65);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .breadcrumb i { font-size: 0.5rem; flex-shrink: 0; }
+
+    /* hero animation */
+    .hero-inner { animation: heroIn 0.65s ease both; }
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ════════════════════════════════
+       PAGE LAYOUT — 2-column desktop
+    ════════════════════════════════ */
+    .page-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(2.5rem, 6vw, 5rem) var(--page-pad);
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: start;
+    }
+
+    /* ── DETAILS SECTION ── */
+    .details-section { min-width: 0; animation: fadeUp 0.6s 0.15s ease both; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green-accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+    .section-eyebrow::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--gray-soft), transparent);
+    }
+
+    .details-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+      font-weight: 600;
+      color: var(--green-deep);
+      margin-bottom: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.25;
+    }
+    .details-title em { font-style: italic; color: var(--green-accent); }
+
+    /* Detail items */
+    .details-list { display: flex; flex-direction: column; }
+
+    .detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(0.8rem, 2vw, 1.1rem);
+      padding: clamp(1rem, 2.5vw, 1.4rem) 0;
+      border-bottom: 1px solid var(--gray-soft);
+      opacity: 0;
+      transform: translateX(-14px);
+      animation: slideIn 0.5s ease both;
+    }
+    .detail-item:last-child { border-bottom: none; }
+    @keyframes slideIn {
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .detail-item:nth-child(1) { animation-delay: 0.28s; }
+    .detail-item:nth-child(2) { animation-delay: 0.38s; }
+    .detail-item:nth-child(3) { animation-delay: 0.48s; }
+    .detail-item:nth-child(4) { animation-delay: 0.58s; }
+    .detail-item:nth-child(5) { animation-delay: 0.68s; }
+    .detail-item:nth-child(6) { animation-delay: 0.78s; }
+    .detail-item:nth-child(n+7) { animation-delay: 0.85s; }
+
+    .detail-bullet {
+      width: clamp(30px, 4vw, 36px);
+      height: clamp(30px, 4vw, 36px);
+      flex-shrink: 0;
+      border-radius: 9px;
+      background: rgba(34,197,94,0.09);
+      border: 1px solid rgba(34,197,94,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green-accent);
+      font-size: 0.72rem;
+      margin-top: 2px;
+    }
+
+    .detail-text { flex: 1; min-width: 0; }
+    .detail-text strong {
+      display: block;
+      font-weight: 600;
+      color: var(--green-deep);
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
+      margin-bottom: 3px;
+    }
+    .detail-text p {
+      font-size: clamp(0.85rem, 1.3vw, 0.93rem);
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .sidebar-sticky {
+      position: sticky;
+      top: calc(var(--header-h) + 1.5rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    /* CTA Card */
+    .cta-card {
+      background: var(--green-deep);
+      border-radius: 16px;
+      padding: clamp(1.6rem, 3vw, 2.2rem);
+      overflow: hidden;
+      position: relative;
+    }
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.07);
+      pointer-events: none;
+    }
+    .cta-card h4 {
+      font-family: var(--font-display);
+      font-size: clamp(1.15rem, 2vw, 1.3rem);
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+    .cta-card > p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1.5rem;
+      line-height: 1.65;
+      position: relative;
+    }
+
+    .btn-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      padding: 13px 18px;
+      border-radius: 50px;
+      font-size: 0.87rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      border: none;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+      text-decoration: none;
+      position: relative;
+      cursor: pointer;
+    }
+    .btn-wa {
+      background: #22c55e;
+      color: var(--white);
+      box-shadow: 0 4px 18px rgba(34,197,94,0.35);
+      margin-bottom: 9px;
+    }
+    .btn-wa:hover {
+      background: #16a34a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(34,197,94,0.5);
+    }
+    .btn-call {
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .btn-call:hover {
+      background: rgba(255,255,255,0.14);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* Trust badge */
+    .trust-badge {
+      background: var(--gray-soft);
+      border-radius: 12px;
+      padding: 1.3rem 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    .trust-badge .badge-icon {
+      width: 36px; height: 36px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: rgba(201,168,76,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 0.9rem;
+    }
+    .trust-badge .badge-text strong {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--green-deep);
+      margin-bottom: 3px;
+    }
+    .trust-badge .badge-text p {
+      font-size: 0.8rem;
+      color: var(--gray-mid);
+      line-height: 1.55;
+    }
+
+    /* Stats strip inside sidebar */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+    .stat-mini {
+      background: var(--gray-soft);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    .stat-mini strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--green-deep);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-mini span {
+      font-size: 0.73rem;
+      color: var(--gray-mid);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── RELATED SERVICES ── */
+    .related-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--page-pad) clamp(2.5rem, 6vw, 4.5rem);
+      animation: fadeUp 0.6s 0.5s ease both;
+    }
+
+    .related-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .related-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gray-soft);
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .related-card {
+      background: var(--gray-soft);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      border: 1.5px solid transparent;
+      transition: border-color var(--transition), background var(--transition),
+                  transform var(--transition), box-shadow var(--transition);
+      text-decoration: none;
+      min-height: 60px;
+    }
+    .related-card:hover {
+      border-color: var(--green-accent);
+      background: rgba(34,197,94,0.04);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(34,197,94,0.12);
+    }
+    .related-card .rc-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: rgba(34,197,94,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green-accent);
+      font-size: 0.88rem;
+      flex-shrink: 0;
+    }
+    .related-card span {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--green-deep);
+      line-height: 1.3;
+    }
+
+    /* ── FOOTER STRIP ── */
+    .footer-strip {
+      background: var(--green-deep);
+      padding: 1.8rem var(--page-pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-strip p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer-strip strong { color: var(--green-accent); }
+    .footer-strip a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: color var(--transition-fast);
+    }
+    .footer-strip a:hover { color: var(--green-accent); }
+
+    /* ── MOBILE STICKY CTA BAR ── */
+    .mobile-cta-bar {
+      display: none; /* shown only on mobile via media query */
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 150;
+      background: var(--white);
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 0.85rem 1.2rem;
+      gap: 0.75rem;
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.1);
+    }
+
+    .mob-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      min-height: 48px;
+    }
+    .mob-btn:active { transform: scale(0.97); }
+    .mob-btn-wa {
+      background: #22c55e;
+      color: var(--white);
+      box-shadow: 0 3px 14px rgba(34,197,94,0.3);
+    }
+    .mob-btn-call {
+      background: var(--green-deep);
+      color: var(--white);
+    }
+
+    /* ── NOT FOUND ── */
+    .not-found {
+      min-height: 65vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1.5rem;
+    }
+    .not-found .nf-icon {
+      font-size: clamp(3rem, 8vw, 4.5rem);
+      color: var(--gray-soft);
+      margin-bottom: 1.5rem;
+    }
+    .not-found h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      color: var(--green-deep);
+      margin-bottom: 0.8rem;
+    }
+    .not-found p { color: var(--gray-mid); margin-bottom: 2rem; font-size: 0.95rem; }
+    .nf-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border: 1.5px solid var(--green-mid);
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.87rem;
+      color: var(--green-mid);
+      transition: background var(--transition), color var(--transition);
+    }
+    .nf-back:hover { background: var(--green-deep); border-color: var(--green-deep); color: var(--white); }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE BREAKPOINTS
+    ════════════════════════════════════════ */
+
+    /* ── Large desktop (1400px+) ── */
+    @media (min-width: 1400px) {
+      .page-wrap { max-width: 1280px; }
+    }
+
+    /* ── Tablet landscape / small desktop (900px - 1199px) ── */
+    @media (max-width: 1199px) {
+      :root { --page-pad: clamp(1.2rem, 4vw, 3rem); }
+      .page-wrap {
+        grid-template-columns: 1fr 290px;
+        gap: 2.5rem;
+      }
+    }
+
+    /* ── Tablet portrait (768px - 899px) ── */
+    @media (max-width: 899px) {
+      :root { --page-pad: clamp(1.2rem, 4vw, 2.5rem); }
+
+      .page-wrap {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding-bottom: 2rem;
+      }
+
+      /* Sidebar moves below details */
+      .sidebar {
+        margin-top: 2.5rem;
+      }
+      .sidebar-sticky {
+        position: static;
+      }
+
+      /* Sidebar CTA goes horizontal */
+      .cta-card { padding: 1.8rem; }
+
+      .stats-strip { grid-template-columns: repeat(4, 1fr); }
+      .stat-mini { padding: 0.9rem 0.7rem; }
+      .stat-mini strong { font-size: 1.3rem; }
+
+      /* Related: horizontal scroll on tablet */
+      .related-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 0.8rem;
+      }
+    }
+
+    /* ── Mobile large (600px - 767px) ── */
+    @media (max-width: 767px) {
+      :root {
+        --header-h: 64px;
+        --page-pad: 1.2rem;
+      }
+
+      /* Show mobile sticky CTA bar */
+      .mobile-cta-bar { display: flex; }
+      /* Add padding-bottom so content isn't hidden behind sticky bar */
+      body { padding-bottom: var(--mobile-cta-h); }
+
+      /* Header: hide logo text on small tablets */
+      .logo-text { font-size: 1.3rem; }
+
+      /* Back button: keep label but smaller */
+      .back-btn { padding: 7px 14px; font-size: 0.78rem; }
+
+      /* Hero */
+      .hero-accent-line { display: none; }
+      .hero-title { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+      .hero-desc { max-width: 100%; }
+      .hero-inner { padding-top: 2.5rem; padding-bottom: clamp(2.5rem, 6vw, 3rem); }
+
+      /* Sidebar: hide desktop CTA card since we have mobile bar */
+      .cta-card { display: none; }
+
+      /* Stats in sidebar — show 2-col */
+      .stats-strip { grid-template-columns: 1fr 1fr; }
+
+      /* Related: horizontal scroll */
+      .related-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 0.8rem;
+        padding-bottom: 0.5rem;
+        /* hide scrollbar but keep functionality */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .related-grid::-webkit-scrollbar { display: none; }
+      .related-card { flex-shrink: 0; min-width: 170px; }
+
+      /* Footer strip: stack */
+      .footer-strip {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+        padding: 1.4rem var(--page-pad);
+      }
+    }
+
+    /* ── Mobile medium (480px - 599px) ── */
+    @media (max-width: 599px) {
+      :root { --page-pad: 1rem; }
+
+      .hero-title { font-size: clamp(1.65rem, 8vw, 2.2rem); }
+      .hero-desc { font-size: 0.88rem; }
+
+      .details-title { font-size: 1.4rem; }
+      .detail-item { gap: 0.75rem; padding: 1rem 0; }
+
+      .trust-badge { padding: 1.1rem 1.2rem; }
+      .stats-strip { gap: 0.6rem; }
+      .stat-mini strong { font-size: 1.2rem; }
+
+      .related-card { min-width: 150px; }
+    }
+
+    /* ── Mobile small (≤ 479px) ── */
+    @media (max-width: 479px) {
+      :root {
+        --header-h: 60px;
+        --page-pad: 1rem;
+      }
+
+      /* Logo: show only icon on very small phones */
+      .logo-text .logo-word { display: none; }
+      .logo-text .logo-green { display: inline; }
+
+      /* Back button: icon only */
+      .back-btn .btn-label { display: none; }
+      .back-btn { padding: 9px 13px; }
+
+      .hero-title { font-size: clamp(1.5rem, 9vw, 2rem); }
+      .hero-ring-1, .hero-ring-2 { display: none; }
+
+      .page-wrap { padding: 2rem var(--page-pad) 1.5rem; }
+
+      .details-title { font-size: 1.3rem; }
+
+      .breadcrumb { font-size: 0.7rem; gap: 5px; }
+
+      .mob-btn { font-size: 0.82rem; padding: 11px 12px; }
+    }
+
+    /* ── Very small (≤ 359px — e.g. Galaxy Fold) ── */
+    @media (max-width: 359px) {
+      .hero-title { font-size: 1.4rem; }
+      .detail-text strong { font-size: 0.88rem; }
+      .stat-mini strong { font-size: 1.1rem; }
+      .mob-btn { font-size: 0.78rem; gap: 6px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -18,32 +839,42 @@
   <header class="header">
     <a href="index.html" class="logo-link">
       <img src="img/green_mark_logo.png" alt="Green Mark Logo" class="logo-image">
-      <span class="logo-text"><span>Green</span> Mark</span>
+      <span class="logo-text">
+        <span class="logo-green">Green</span><span class="logo-word"> Mark</span>
+      </span>
     </a>
     <a href="index.html#services" class="back-btn">
-      <i class="fa-solid fa-arrow-left"></i> All Services
+      <i class="fa-solid fa-arrow-left"></i>
+      <span class="btn-label">All Services</span>
     </a>
   </header>
 
-  <!-- DYNAMIC CONTENT — injected by JS -->
+  <!-- DYNAMIC CONTENT -->
   <main id="pageContent"></main>
+
+  <!-- MOBILE STICKY CTA BAR -->
+  <div class="mobile-cta-bar" id="mobileCta">
+    <a href="https://wa.me/+971509007659" class="mob-btn mob-btn-wa" target="_blank">
+      <i class="fa-brands fa-whatsapp"></i> WhatsApp
+    </a>
+    <a href="tel:+971509007659" class="mob-btn mob-btn-call">
+      <i class="fa-solid fa-phone"></i> Call Us
+    </a>
+  </div>
 
   <!-- FOOTER -->
   <footer class="footer-strip">
     <p>© 2026 <strong>Green Mark</strong>. All rights reserved — Dubai, UAE</p>
-    <a href="index.html">
-      <i class="fa-solid fa-house"></i> Back to Home
-    </a>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Back to Home</a>
   </footer>
 
   <script>
     /* ══════════════════════════════════════════
-       SERVICES DATA — update details here
+       SERVICES DATA
     ══════════════════════════════════════════ */
     const SERVICES = {
       'document-clearance': {
         icon:     'fa-file-invoice',
-        number:   '01',
         eyebrow:  'Government & Corporate',
         title:    'Document <em>Clearance</em>',
         subtitle: 'Professional handling of all government and corporate paperwork with speed and unmatched accuracy.',
@@ -56,10 +887,8 @@
         ],
         related: ['business-setup', 'pro-services'],
       },
-
       'business-setup': {
         icon:     'fa-handshake',
-        number:   '02',
         eyebrow:  'UAE Business Formation',
         title:    'Business <em>Setup</em>',
         subtitle: 'Expert guidance to start your new business journey in the UAE from A to Z, hassle-free.',
@@ -72,13 +901,11 @@
         ],
         related: ['document-clearance', 'pro-services'],
       },
-
       'pro-services': {
         icon:     'fa-shield-halved',
-        number:   '03',
         eyebrow:  'Government Relations',
         title:    'PRO <em>Services</em>',
-        subtitle: 'Comprehensive PRO solutions to manage your company\'s official government requirements smoothly.',
+        subtitle: "Comprehensive PRO solutions to manage your company's official government requirements smoothly.",
         details: [
           { title: 'Visa Renewals',             desc: 'Timely renewal of all employee and investor visas.' },
           { title: 'Labour Card Processing',    desc: 'Managing MOL labour cards and work permits.' },
@@ -88,13 +915,11 @@
         ],
         related: ['document-clearance', 'business-setup'],
       },
-
       'pro-services-2': {
         icon:     'fa-shield-halved',
-        number:   '04',
         eyebrow:  'Government Relations',
         title:    'PRO <em>Services 2</em>',
-        subtitle: 'Comprehensive PRO solutions to manage your company\'s official government requirements smoothly.',
+        subtitle: "Comprehensive PRO solutions to manage your company's official government requirements smoothly.",
         details: [
           { title: 'Service A', desc: 'Description for service A.' },
           { title: 'Service B', desc: 'Description for service B.' },
@@ -104,13 +929,11 @@
         ],
         related: ['pro-services', 'pro-services-3'],
       },
-
       'pro-services-3': {
         icon:     'fa-shield-halved',
-        number:   '05',
         eyebrow:  'Government Relations',
         title:    'PRO <em>Services 3</em>',
-        subtitle: 'Comprehensive PRO solutions to manage your company\'s official government requirements smoothly.',
+        subtitle: "Comprehensive PRO solutions to manage your company's official government requirements smoothly.",
         details: [
           { title: 'Service A', desc: 'Description for service A.' },
           { title: 'Service B', desc: 'Description for service B.' },
@@ -122,8 +945,7 @@
       },
     };
 
-    /* Related service display names */
-    const SERVICE_NAMES = {
+    const SERVICE_META = {
       'document-clearance': { icon: 'fa-file-invoice', label: 'Document Clearance' },
       'business-setup':     { icon: 'fa-handshake',    label: 'Business Setup'     },
       'pro-services':       { icon: 'fa-shield-halved',label: 'PRO Services'       },
@@ -135,55 +957,53 @@
        RENDER
     ══════════════════════════════════════════ */
     function render() {
-      const params  = new URLSearchParams(window.location.search);
-      const id      = params.get('id');
+      const id      = new URLSearchParams(window.location.search).get('id');
       const service = SERVICES[id];
       const content = document.getElementById('pageContent');
 
       if (!service) {
+        document.getElementById('mobileCta').style.display = 'none';
         content.innerHTML = `
-          <div class="not-found" style="margin-top: var(--header-h);">
-            <i class="fa-regular fa-circle-xmark"></i>
+          <div class="not-found" style="margin-top:var(--header-h)">
+            <i class="fa-regular fa-circle-xmark nf-icon"></i>
             <h2>Service Not Found</h2>
             <p>The service you're looking for doesn't exist or may have moved.</p>
-            <a href="index.html#services" class="back-btn" style="display:inline-flex; gap:8px; align-items:center; padding:11px 24px; border:1.5px solid var(--green-mid); border-radius:50px; font-weight:600; font-size:0.85rem; color:var(--green-mid);">
+            <a href="index.html#services" class="nf-back">
               <i class="fa-solid fa-arrow-left"></i> View All Services
             </a>
           </div>`;
         return;
       }
 
-      /* Update page title */
-      document.title = service.title.replace(/<[^>]+>/g, '') + ' — Green Mark';
+      const plainTitle = service.title.replace(/<[^>]+>/g, '');
+      document.title = plainTitle + ' — Green Mark';
 
-      /* Build details list */
       const detailsHTML = service.details.map(d => `
         <div class="detail-item">
           <div class="detail-bullet"><i class="fa-solid fa-check"></i></div>
           <div class="detail-text">
             <strong>${d.title}</strong>
-            ${d.desc}
+            <p>${d.desc}</p>
           </div>
-        </div>
-      `).join('');
+        </div>`).join('');
 
-      /* Build related list */
       const relatedHTML = (service.related || []).map(rid => {
-        const r = SERVICE_NAMES[rid];
-        if (!r) return '';
-        return `
+        const r = SERVICE_META[rid];
+        return r ? `
           <a href="service.html?id=${rid}" class="related-card">
-            <i class="fa-solid ${r.icon}"></i>
+            <div class="rc-icon"><i class="fa-solid ${r.icon}"></i></div>
             <span>${r.label}</span>
-          </a>`;
+          </a>` : '';
       }).join('');
 
       content.innerHTML = `
-        <!-- HERO -->
+        <!-- ── HERO ── -->
         <section class="service-hero">
           <div class="hero-bg-pattern"></div>
-          <div class="hero-lines"></div>
-          <div class="hero-content">
+          <div class="hero-ring hero-ring-1"></div>
+          <div class="hero-ring hero-ring-2"></div>
+          <div class="hero-accent-line"></div>
+          <div class="hero-inner">
             <div class="service-eyebrow">${service.eyebrow}</div>
             <div class="hero-icon"><i class="fa-solid ${service.icon}"></i></div>
             <h1 class="hero-title">${service.title}</h1>
@@ -194,44 +1014,64 @@
             <i class="fa-solid fa-chevron-right"></i>
             <a href="index.html#services">Services</a>
             <i class="fa-solid fa-chevron-right"></i>
-            <span style="color:rgba(255,255,255,0.6)">${service.title.replace(/<[^>]+>/g,'')}</span>
+            <span class="bc-current">${plainTitle}</span>
           </div>
         </section>
 
-        <!-- BODY -->
-        <div class="service-body">
+        <!-- ── BODY GRID ── -->
+        <div class="page-wrap">
 
-          <!-- Left: Detail List -->
+          <!-- Details -->
           <div class="details-section">
-            <div class="details-label">What's Included</div>
+            <div class="section-eyebrow">What's Included</div>
             <h2 class="details-title">Everything You <em>Need</em></h2>
-            <div class="details-list">
-              ${detailsHTML}
-            </div>
+            <div class="details-list">${detailsHTML}</div>
           </div>
 
-          <!-- Right: Sidebar -->
+          <!-- Sidebar -->
           <aside class="sidebar">
-            <div class="sidebar-card">
-              <h4>Get Started Today</h4>
-              <p>Our team is ready to assist you. Reach out via WhatsApp for the fastest response.</p>
-              <a href="https://wa.me/+971509007659" class="btn-cta btn-wa" target="_blank">
-                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
-              </a>
-              <a href="tel:+971509007659" class="btn-cta btn-call">
-                <i class="fa-solid fa-phone"></i> +971 50 900 7659
-              </a>
-            </div>
-            <div class="info-badge">
-              <i class="fa-solid fa-star"></i>
-              <p><strong>9+ Years Experience</strong><br>Trusted by 8,000+ clients across the UAE with 100% satisfaction guaranteed.</p>
+            <div class="sidebar-sticky">
+
+              <!-- Desktop CTA card (hidden on mobile — use sticky bar instead) -->
+              <div class="cta-card">
+                <h4>Get Started Today</h4>
+                <p>Our team is ready to help. Reach out via WhatsApp for the fastest response.</p>
+                <a href="https://wa.me/+971509007659" class="btn-cta btn-wa" target="_blank">
+                  <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+                <a href="tel:+971509007659" class="btn-cta btn-call">
+                  <i class="fa-solid fa-phone"></i> +971 50 900 7659
+                </a>
+              </div>
+
+              <!-- Trust badge -->
+              <div class="trust-badge">
+                <div class="badge-icon"><i class="fa-solid fa-star"></i></div>
+                <div class="badge-text">
+                  <strong>9+ Years of Excellence</strong>
+                  <p>Trusted by over 8,000 clients across the UAE with 100% satisfaction.</p>
+                </div>
+              </div>
+
+              <!-- Mini stats -->
+              <div class="stats-strip">
+                <div class="stat-mini">
+                  <strong>8K+</strong>
+                  <span>Clients Served</span>
+                </div>
+                <div class="stat-mini">
+                  <strong>9+</strong>
+                  <span>Years Experience</span>
+                </div>
+              </div>
+
             </div>
           </aside>
         </div>
 
-        <!-- RELATED -->
+        <!-- ── RELATED ── -->
         ${relatedHTML ? `
-        <div class="related-section">
+        <div class="related-wrap">
           <p class="related-label">You may also need</p>
           <div class="related-grid">${relatedHTML}</div>
         </div>` : ''}
