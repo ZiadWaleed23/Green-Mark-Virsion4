@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="icon" href="img/green_mark_logo.png">
+  <link rel="stylesheet" href="service.css">
+  <title>Service — Green Mark</title>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <a href="index.html" class="logo-link">
+      <img src="img/green_mark_logo.png" alt="Green Mark Logo" class="logo-image">
+      <span class="logo-text"><span>Green</span> Mark</span>
+    </a>
+    <a href="index.html#services" class="back-btn">
+      <i class="fa-solid fa-arrow-left"></i> All Services
+    </a>
+  </header>
+
+  <!-- DYNAMIC CONTENT — injected by JS -->
+  <main id="pageContent"></main>
+
+  <!-- FOOTER -->
+  <footer class="footer-strip">
+    <p>© 2026 <strong>Green Mark</strong>. All rights reserved — Dubai, UAE</p>
+    <a href="index.html">
+      <i class="fa-solid fa-house"></i> Back to Home
+    </a>
+  </footer>
+
+  <script>
+    /* ══════════════════════════════════════════
+       SERVICES DATA — update details here
+    ══════════════════════════════════════════ */
+    const SERVICES = {
+      'document-clearance': {
+        icon:     'fa-file-invoice',
+        number:   '01',
+        eyebrow:  'Government & Corporate',
+        title:    'Document <em>Clearance</em>',
+        subtitle: 'Professional handling of all government and corporate paperwork with speed and unmatched accuracy.',
+        details: [
+          { title: 'Government Documentation', desc: 'Full handling of all official government paperwork and submissions.' },
+          { title: 'Corporate Paperwork',       desc: 'End-to-end management of corporate documents and approvals.' },
+          { title: 'Ministry Transactions',     desc: 'Liaising with ministries and departments on your behalf.' },
+          { title: 'Attestation & Notarization',desc: 'Official attestation and notarization of legal documents.' },
+          { title: 'Express Processing',        desc: 'Priority processing options for urgent document needs.' },
+        ],
+        related: ['business-setup', 'pro-services'],
+      },
+
+      'business-setup': {
+        icon:     'fa-handshake',
+        number:   '02',
+        eyebrow:  'UAE Business Formation',
+        title:    'Business <em>Setup</em>',
+        subtitle: 'Expert guidance to start your new business journey in the UAE from A to Z, hassle-free.',
+        details: [
+          { title: 'License Registration',      desc: 'Mainland, Free Zone, and Offshore company licensing.' },
+          { title: 'Trade Name Reservation',    desc: 'Securing your brand identity with the right authorities.' },
+          { title: 'Office Space Solutions',    desc: 'Flexi-desk, virtual, and full office setup options.' },
+          { title: 'Visa Processing',           desc: 'Investor, partner, and employee visa applications.' },
+          { title: 'Bank Account Opening',      desc: 'Assistance with corporate bank account setup in the UAE.' },
+        ],
+        related: ['document-clearance', 'pro-services'],
+      },
+
+      'pro-services': {
+        icon:     'fa-shield-halved',
+        number:   '03',
+        eyebrow:  'Government Relations',
+        title:    'PRO <em>Services</em>',
+        subtitle: 'Comprehensive PRO solutions to manage your company\'s official government requirements smoothly.',
+        details: [
+          { title: 'Visa Renewals',             desc: 'Timely renewal of all employee and investor visas.' },
+          { title: 'Labour Card Processing',    desc: 'Managing MOL labour cards and work permits.' },
+          { title: 'Emirates ID Services',      desc: 'New applications, renewals, and updates for Emirates ID.' },
+          { title: 'Medical Fitness Typing',    desc: 'Coordination of medical fitness tests for visa processing.' },
+          { title: 'Government Liaison',        desc: 'Acting as your dedicated point of contact with authorities.' },
+        ],
+        related: ['document-clearance', 'business-setup'],
+      },
+
+      'pro-services-2': {
+        icon:     'fa-shield-halved',
+        number:   '04',
+        eyebrow:  'Government Relations',
+        title:    'PRO <em>Services 2</em>',
+        subtitle: 'Comprehensive PRO solutions to manage your company\'s official government requirements smoothly.',
+        details: [
+          { title: 'Service A', desc: 'Description for service A.' },
+          { title: 'Service B', desc: 'Description for service B.' },
+          { title: 'Service C', desc: 'Description for service C.' },
+          { title: 'Service D', desc: 'Description for service D.' },
+          { title: 'Service E', desc: 'Description for service E.' },
+        ],
+        related: ['pro-services', 'pro-services-3'],
+      },
+
+      'pro-services-3': {
+        icon:     'fa-shield-halved',
+        number:   '05',
+        eyebrow:  'Government Relations',
+        title:    'PRO <em>Services 3</em>',
+        subtitle: 'Comprehensive PRO solutions to manage your company\'s official government requirements smoothly.',
+        details: [
+          { title: 'Service A', desc: 'Description for service A.' },
+          { title: 'Service B', desc: 'Description for service B.' },
+          { title: 'Service C', desc: 'Description for service C.' },
+          { title: 'Service D', desc: 'Description for service D.' },
+          { title: 'Service E', desc: 'Description for service E.' },
+        ],
+        related: ['pro-services', 'pro-services-2'],
+      },
+    };
+
+    /* Related service display names */
+    const SERVICE_NAMES = {
+      'document-clearance': { icon: 'fa-file-invoice', label: 'Document Clearance' },
+      'business-setup':     { icon: 'fa-handshake',    label: 'Business Setup'     },
+      'pro-services':       { icon: 'fa-shield-halved',label: 'PRO Services'       },
+      'pro-services-2':     { icon: 'fa-shield-halved',label: 'PRO Services 2'     },
+      'pro-services-3':     { icon: 'fa-shield-halved',label: 'PRO Services 3'     },
+    };
+
+    /* ══════════════════════════════════════════
+       RENDER
+    ══════════════════════════════════════════ */
+    function render() {
+      const params  = new URLSearchParams(window.location.search);
+      const id      = params.get('id');
+      const service = SERVICES[id];
+      const content = document.getElementById('pageContent');
+
+      if (!service) {
+        content.innerHTML = `
+          <div class="not-found" style="margin-top: var(--header-h);">
+            <i class="fa-regular fa-circle-xmark"></i>
+            <h2>Service Not Found</h2>
+            <p>The service you're looking for doesn't exist or may have moved.</p>
+            <a href="index.html#services" class="back-btn" style="display:inline-flex; gap:8px; align-items:center; padding:11px 24px; border:1.5px solid var(--green-mid); border-radius:50px; font-weight:600; font-size:0.85rem; color:var(--green-mid);">
+              <i class="fa-solid fa-arrow-left"></i> View All Services
+            </a>
+          </div>`;
+        return;
+      }
+
+      /* Update page title */
+      document.title = service.title.replace(/<[^>]+>/g, '') + ' — Green Mark';
+
+      /* Build details list */
+      const detailsHTML = service.details.map(d => `
+        <div class="detail-item">
+          <div class="detail-bullet"><i class="fa-solid fa-check"></i></div>
+          <div class="detail-text">
+            <strong>${d.title}</strong>
+            ${d.desc}
+          </div>
+        </div>
+      `).join('');
+
+      /* Build related list */
+      const relatedHTML = (service.related || []).map(rid => {
+        const r = SERVICE_NAMES[rid];
+        if (!r) return '';
+        return `
+          <a href="service.html?id=${rid}" class="related-card">
+            <i class="fa-solid ${r.icon}"></i>
+            <span>${r.label}</span>
+          </a>`;
+      }).join('');
+
+      content.innerHTML = `
+        <!-- HERO -->
+        <section class="service-hero">
+          <div class="hero-bg-pattern"></div>
+          <div class="hero-lines"></div>
+          <div class="hero-content">
+            <div class="service-eyebrow">${service.eyebrow}</div>
+            <div class="hero-icon"><i class="fa-solid ${service.icon}"></i></div>
+            <h1 class="hero-title">${service.title}</h1>
+            <p class="hero-desc">${service.subtitle}</p>
+          </div>
+          <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="index.html#services">Services</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span style="color:rgba(255,255,255,0.6)">${service.title.replace(/<[^>]+>/g,'')}</span>
+          </div>
+        </section>
+
+        <!-- BODY -->
+        <div class="service-body">
+
+          <!-- Left: Detail List -->
+          <div class="details-section">
+            <div class="details-label">What's Included</div>
+            <h2 class="details-title">Everything You <em>Need</em></h2>
+            <div class="details-list">
+              ${detailsHTML}
+            </div>
+          </div>
+
+          <!-- Right: Sidebar -->
+          <aside class="sidebar">
+            <div class="sidebar-card">
+              <h4>Get Started Today</h4>
+              <p>Our team is ready to assist you. Reach out via WhatsApp for the fastest response.</p>
+              <a href="https://wa.me/+971509007659" class="btn-cta btn-wa" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+              </a>
+              <a href="tel:+971509007659" class="btn-cta btn-call">
+                <i class="fa-solid fa-phone"></i> +971 50 900 7659
+              </a>
+            </div>
+            <div class="info-badge">
+              <i class="fa-solid fa-star"></i>
+              <p><strong>9+ Years Experience</strong><br>Trusted by 8,000+ clients across the UAE with 100% satisfaction guaranteed.</p>
+            </div>
+          </aside>
+        </div>
+
+        <!-- RELATED -->
+        ${relatedHTML ? `
+        <div class="related-section">
+          <p class="related-label">You may also need</p>
+          <div class="related-grid">${relatedHTML}</div>
+        </div>` : ''}
+      `;
+    }
+
+    render();
+  </script>
+
+</body>
+</html>
