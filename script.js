@@ -393,18 +393,23 @@ document.head.appendChild(style);
 
 
 /* ─────────────────────────────────────────────
-   TOGGLE SERVICE DETAILS (LEARN MORE)
+   LEARN MORE — Navigate to Service Page
 ───────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   const learnMoreBtns = document.querySelectorAll('.learn-more-btn');
-  
+
   learnMoreBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      // بنجيب الكارت اللي العميل داس عليه
+    btn.addEventListener('click', function () {
       const card = this.closest('.service-card');
-      
-      // بنفتح أو نقفل الكارت ده
-      card.classList.toggle('show-details');
+      const serviceId = card ? card.dataset.serviceId : null;
+
+      if (serviceId) {
+        // Navigate to the dedicated service page
+        window.location.href = `service.html?id=${serviceId}`;
+      } else {
+        // Fallback: expand in-card (original behaviour)
+        if (card) card.classList.toggle('show-details');
+      }
     });
   });
 });
